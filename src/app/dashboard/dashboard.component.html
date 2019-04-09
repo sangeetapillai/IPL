@@ -1,0 +1,249 @@
+
+
+<div  class="col-lg-12">
+  <!-- Heading Component-->
+  <article>
+    <h5 class="heading-component-title">
+        {{currentGame}} <p><a href="#" data-toggle="modal" data-target="#switchgamemodal">Switch game</a></p>
+      </h5>
+
+     <h5 class="heading-component-title">
+         {{currentView}}<p><a href="#" data-toggle="modal" data-target="#switchviewmodal">Switch view</a></p>
+      </h5>
+
+
+
+  </article>
+  <!--<div class="sport-table-header">
+    <p>{{matchTypes[0]['label']}} ({{matchesByType.length}})</p>
+  </div> -->
+  <!-- MATCH VIEW -->
+ <div *ngIf="matchView" class="view">
+  <div  *ngFor="let match of matchesByType">
+  <div class="sport-table">
+    <div class="sport-table-tr">
+      <div class="row sport-row align-items-center row-15">
+        <div class="col-sm-1 col-md-1 col-lg-1">
+          <div class="sport-table-icon">
+            <div class="sprite sprite-sport-icon-07">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9 col-md-4 col-lg-3">
+          <div class="sport-table-title">
+            <div class="sport-table-title-item sport-table-title-item-left">
+              <div>
+                <img src="https://ssl.gstatic.com/onebox/media/sports/logos/MxXIt0k-eorEn6yOhD-KBA_96x96.png" heigth=20px width="20px">
+                <span class="sport-table-title-team">{{match.team1}}</span>
+              </div>
+              <div>
+                <img src="https://ssl.gstatic.com/onebox/media/sports/logos/exZiFUT_GXScTyr358t7SQ_96x96.png" heigth=20px width="20px">
+                <span class="sport-table-title-team">{{match.team2}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-10 col-md-6 col-lg-7">
+          <div class="sport-table-wager">
+            <a [ngClass]="match.votedFor && match.votedFor.toUpperCase() == match.team1.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button '"(click)="selectTeamforBet(match, match.team1)" href="#" data-toggle="modal" data-target="#confirmbetmodal" >
+              <span>{{match.team1}}</span>
+              <!--<span class="sport-table-wager-button-count">1.23</span>-->
+            </a>
+            <a [ngClass]="match.votedFor && match.votedFor.toUpperCase() == 'draw'.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button '" (click)="selectTeamforBet(match, 'draw')" href="#" data-toggle="modal" data-target="#confirmbetmodal" >
+              <span>Draw</span>
+              <!--<span class="sport-table-wager-button-count">13.00</span>-->
+            </a>
+            <a [ngClass]="match.votedFor && match.votedFor.toUpperCase() == match.team2.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button defaultcursor'"(click)="selectTeamforBet(match, match.team1)" (click)="selectTeamforBet(match, match.team2)" href="#" data-toggle="modal" data-target="#confirmbetmodal">
+              <span>{{match.team2}}</span>
+              <!--<span class="sport-table-wager-button-count">34.25</span> -->
+            </a>
+          </div>
+        </div>
+        <!--<div class="col-sm-2 col-md-1 col-lg-1">
+          <div class="sport-table-bonus">
+            <span class="sport-table-bonus-count">+58</span>
+            <span class="sport-table-bonus-icon material-icons-chevron_right"></span>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<!-- Past Match View-->
+<div *ngIf="pastMatchView" class="view user_view">
+<div  *ngFor="let match of pastMatchesByType">
+  <div class="sport-table">
+    <div class="sport-table-tr">
+      <div class="row sport-row align-items-center row-15">
+        <div class="col-sm-1 col-md-1 col-lg-1">
+          <div class="sport-table-icon">
+            <div class="sprite sprite-sport-icon-07">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2 col-md-1 col-lg-1">
+
+        	<div *ngIf="match.votedFor">
+        	<div *ngIf="match.won;then  showthumbsup else showthumbsdown"></div>
+        	<ng-template #showthumbsup>
+              	<i class="sport-table-bonus-icon fa fa-thumbs-up text-success"></i>
+              </ng-template>
+            <ng-template #showthumbsdown>
+              	<i class="sport-table-bonus-icon fa fa-thumbs-down text-danger"></i>
+              </ng-template>  
+          </div>
+      </div>
+          <div class="col-sm-7 col-md-3 col-lg-2">
+          <div class="sport-table-title">
+            <div class="sport-table-title-item sport-table-title-item-left">
+              <div>
+                <img src="https://ssl.gstatic.com/onebox/media/sports/logos/MxXIt0k-eorEn6yOhD-KBA_96x96.png" heigth=20px width="20px">
+                <span class="sport-table-title-team">{{match.team1}}</span>
+              </div>
+              <div>
+                <img src="https://ssl.gstatic.com/onebox/media/sports/logos/exZiFUT_GXScTyr358t7SQ_96x96.png" heigth=20px width="20px">
+                <span class="sport-table-title-team">{{match.team2}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-10 col-md-6 col-lg-7">
+          <div class="sport-table-wager">
+            <a [ngClass]="match.winner && match.winner.toUpperCase() == match.team1.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button '"(click)="selectTeamforBet(match, match.team1)" href="#" data-toggle="modal" data-target="#confirmbetmodal" >
+              <span>{{match.team1}}</span>              
+              <!--<span class="sport-table-wager-button-count">1.23</span>-->
+            </a>
+            <a [ngClass]="match.winner && match.winner.toUpperCase() == 'draw'.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button '" (click)="selectTeamforBet(match, 'draw')" href="#" data-toggle="modal" data-target="#confirmbetmodal" >
+              <span>Draw</span>
+              <!--<span class="sport-table-wager-button-count">13.00</span>-->
+            </a>
+            <a [ngClass]="match.winner && match.winner.toUpperCase() == match.team2.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button defaultcursor'"(click)="selectTeamforBet(match, match.team1)" (click)="selectTeamforBet(match, match.team2)" href="#" data-toggle="modal" data-target="#confirmbetmodal">
+              <span>{{match.team2}}</span>
+              <!--<span class="sport-table-wager-button-count">34.25</span> -->
+            </a>
+          </div>
+        </div>
+        <!--<div class="col-sm-2 col-md-1 col-lg-1">
+          <div class="sport-table-bonus">
+            <span class="sport-table-bonus-count">+58</span>
+            <span class="sport-table-bonus-icon material-icons-chevron_right"></span>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+<!-- USER VIEW -->
+
+
+<div *ngIf="userView" class="view user_view">
+  <div class="row">
+    <input [(ngModel)]="searchText" class="searchbar" placeholder="Search..." />
+  </div>
+  <div class="row">
+    <div class="col-md-3 card"  *ngFor="let user of users | search : searchText ">
+      <div>
+        <h5>{{user.name}}</h5>
+      </div>
+      <div class="medium_font">
+        <label>Total Bounty :: {{user.bounty}}</label>
+      </div>
+      <div>
+        <label> Won ::  {{user.won}}</label>
+        <label> Lost :: {{user.lost}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CONFIRM BET -->
+<div class="modal" id="confirmbetmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Bet for {{selectedTeam}} for the game "{{selectedMatch}}" ?
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn " data-dismiss="modal" (click)="bet()">Yes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SWITCH GAME-->
+<div class="modal" id="switchgamemodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Switch Game</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container games_table">
+          <div class="row">
+            <div class="col-md-3 card"  *ngFor="let type of matchTypes">
+              <button (click)="switchGame(type)" type="button" class="btn" data-dismiss="modal">{{type.label}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SWITCH VIEW-->
+<div class="modal" id="switchviewmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Switch View</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container games_table">
+          <div class="row">
+            <div class="col-md-3 card"  *ngFor="let type of viewTypes">
+              <button (click)="switchView(type)" type="button" class="btn" data-dismiss="modal">{{type}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
