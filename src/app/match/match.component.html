@@ -1,0 +1,196 @@
+<div [class.overlay] = "matchlistloading"><span [class]="matchlistloading  ? 'loader' : 'hide'"><img src="../assets/images/some.gif" /></span></div>
+
+<div *ngIf="matchesByType;then showMatchList else showNoContentMessage"></div>
+  <ng-template #showNoContentMessage>
+    No Matches
+  </ng-template>
+  <ng-template #showMatchList>
+<!--<div *ngIf="matchView" class="view"> -->
+  <div class="upcoming_match" *ngFor="let match of matchesByType">
+  <div class="sport-table">
+    <div class="sport-table-tr">
+      <div *ngIf="allowmatchbetting;then showmatchbetview else showfantasyteamview"></div>
+      <ng-template #showmatchbetview>
+           <div class="row sport-row align-items-center row-15">
+        <div class="col-sm-1 col-md-1 col-lg-1">
+          <div class="sport-table-icon">
+            <div class="sprite sprite-sport-icon-07">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9 col-md-4 col-lg-3">
+          <div class="sport-table-title">
+            <div class="sport-table-title-item sport-table-title-item-left inline">
+              <span>
+                <img src="{{match.t1}}" heigth=20px width="20px">
+                <span class="sport-table-title-team">{{match.team1Name}}</span>
+              </span>
+              Vs
+              <span>
+                <img src="{{match.t2}}" heigth=20px width="20px">
+                <span class="sport-table-title-team">{{match.team2Name}}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-10 col-md-6 col-lg-7">
+          <div class="sport-table-wager">
+            <a [ngClass]="match.votedFor && match.votedFor.toUpperCase() == match.team1Name.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button '"(click)="selectTeamforBet(match, match.team1Name)" href="#" data-toggle="modal" data-target="#confirmbetmodal" >
+              <span>{{match.team1Name}}</span>
+              <!--<span class="sport-table-wager-button-count">1.23</span>-->
+            </a>
+            <a [ngClass]="match.votedFor && match.votedFor.toUpperCase() == 'draw'.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button '" (click)="selectTeamforBet(match, 'draw')" href="#" data-toggle="modal" data-target="#confirmbetmodal" >
+              <span>Draw</span>
+              <!--<span class="sport-table-wager-button-count">13.00</span>-->
+            </a>
+            <a [ngClass]="match.votedFor && match.votedFor.toUpperCase() == match.team2Name.toUpperCase()? 'sport-table-wager-button active ' : 'sport-table-wager-button defaultcursor'"(click)="selectTeamforBet(match, match.team1)" (click)="selectTeamforBet(match, match.team2Name)" href="#" data-toggle="modal" data-target="#confirmbetmodal">
+              <span>{{match.team2Name}}</span>
+              <!--<span class="sport-table-wager-button-count">34.25</span> -->
+            </a>
+          </div>
+        </div>
+       
+      </div>
+      </ng-template>
+      <ng-template #showfantasyteamview>
+        <div class="sport-row align-items-center">
+          <div class="sport-table-title">
+            <div class="">
+              <span>
+                <img src="{{match.t1}}" heigth=20px width="20px">
+                <span class="sport-table-title-team">{{match.team1Name}}</span>
+              </span>
+              VS
+              <span>
+                <img src="{{match.t2}}" heigth=20px width="20px">
+                <span class="sport-table-title-team">{{match.team2Name}}</span>
+              </span>
+            </div>
+          </div>        
+          
+          <div class="sport-table-wager">
+
+            <div>Time left :: <span class="sport-table-time-left ">{{match.timeLeft}}</span>
+            <label class="sport-general-margin">Starts At :: </label><span class="sport-table-time">{{match.matchTime}}</span></div>
+            <div>
+              <a class="sport-table-team-link" (click)="getUserList(match)" href="#" data-toggle="modal" data-target="#fantasyteams">All Fantasy teams</a>
+              <a class="sport-table-team-link  sport-general-margin" href="#" data-toggle="modal" data-target="#myfantasyteam" (click)="getAllPlayersForMatch(match)">My Fantasy team</a>
+            </div>
+            
+          </div>
+        
+       
+      </div>
+      </ng-template>
+      
+    </div>
+  </div>
+  </div>
+
+<!--</div> -->
+</ng-template>
+
+<!-- Modal fantasy team -->
+<div class="modal" id="fantasyteams">
+  <div class="modal-dialog bigmodal">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Fantasy teams</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-3">
+            <ul *ngFor="let u of users">
+              <li (click)="updateTeam(u) ">
+                {{u.userEmail}}
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-9">
+            <div *ngIf="userPlayer">
+              <div *ngFor="let p of userPlayer">
+               {{p.player_name}}
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal for myfantasy team -->
+<div class="modal" id="myfantasyteam">
+  <div class="modal-dialog bigmodal">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">My Fantasy team</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+     <div class="modal-body">
+         <div *ngIf="userPlayer">
+           <div class="row" >
+              <div class="col-md-4" *ngFor="let p of userPlayer">
+               <input (change)="updateMyTeam(p)" type="checkbox" name="addmetofantasyteam" value="{{p.player_id}}" [(ngModel)]="p.checked"/>{{p.player_name}}
+              </div>
+            </div> 
+            <div *ngIf="myteam">
+              Captain :: 
+              <select [(ngModel)]="myteam.captain">
+                  <option *ngFor="let p of myteam.players" [value]="p.player_id" [selected]="myteam.captain == p.player_id">{{p.player_name}}</option>
+              </select>
+              Vice Captain :: 
+              <select [(ngModel)]="myteam.viceCaptain">
+                  <option *ngFor="let p of myteam.players" [value]="p.player_id" [selected]="myteam.viceCaptain == p.player_id">{{p.player_name}}</option>
+              </select>
+              Remaining credit :: {{myteam.remainingCredit}}
+          </div>
+          </div>
+    </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success " data-dismiss="modal" (click)="createMyTeam()">Done</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- MODAL CONFIRM BET -->
+<div class="modal" id="confirmbetmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Bet for {{selectedTeam}} for the game "{{selectedMatch}}" ?
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info " data-dismiss="modal" (click)="bet()">Yes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+      </div>
+
+    </div>
+  </div>
+</div>

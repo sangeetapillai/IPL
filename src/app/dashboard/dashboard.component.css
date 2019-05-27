@@ -1,193 +1,10 @@
-.bg-gray-100 .heading-component {
-  border-bottom-color: #d7d7d7;
-}
-.heading-component {
-  position: relative;
-  line-height: 1;
-  border-bottom: 1px solid #e1e1e1;
-}
-.heading-component-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: -15px;
-}
 
-.heading-component-title {
-  position: relative;
-  display: inline-block;
-  padding-left: 15px;
-  line-height: 26px;
+.dashboard_container{
+  margin-top: 30px;
 }
-.sport-table-header {
-  padding: 12px 23px 1px;
-  font-family: kanit,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif;
-  font-size: 14px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #616161;
-  text-align: left;
+.main_content{
+ 
 }
-.sport-table {
-  background-color: #fff;
-}
-
-.sport-table-tr {
-  padding-left: 0;
-  padding-right: 0;
-}
-.sport-table-tr {
-  padding: 11px 15px;
-  border: 1px solid #e1e1e1;
-}
-
-
-
-.row-15 {
-  margin-bottom: -15px;
-}
-
-.align-items-center {
-  align-items: center!important;
-}
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-}
-
-
-
-sprite.sprite-sport-icon-07 {
-  background-position: -166px 0;
-  width: 25px;
-  height: 25px;
-}
-.sprite {
-  background-image: url('../../assets/images/cricket.png');
-  background-repeat: no-repeat;
-  display: block;
-}
-
-
-
-.sport-table-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-right: 10px;
-}
-
-
-.sport-table-title-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-
-.sport-table-title-team {
-  font-weight: 500;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: #151515;
-}
-.sport-table-title-team, .sport-table-title-score {
-  font-family: kanit,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif;
-  font-size: 14px;
-  line-height: 1.2;
-}
-
-
-.sport-table-title-item-right {
-  align-items: center;
-}
-
-.sport-table-title-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-
-.sport-table-title-score {
-  font-weight: 400;
-  letter-spacing: .1em;
-  color: #151515;
-}
-.sport-table-title-team, .sport-table-title-score {
-  font-family: kanit,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif;
-  font-size: 14px;
-  line-height: 1.2;
-}
-
-
-.sport-table-wager {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-
-.sport-table-wager-button, .sport-table-wager-button:focus, .sport-table-wager-button:active {
-  color: #151515;
-  background-color: #eaecee;
-}
-.sport-table-wager-button {
-  flex-basis: 31.1%;
-  max-width: 31.1%;
-}
-.sport-table a:hover{
-  background-color:#64b000;
-}
-.sport-table a.active{
-  background-color:#64b000;
-}
-.sport-table-wager-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 7px;
-  border-radius: 5px;
-  font-size: 12px;
-  letter-spacing: .025em;
-  text-align: center;
-  font-family: roboto,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif;
-  text-decoration: none;
-  font-weight:bold;
-}
-
-
-.sport-table-bonus {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sport-table-bonus-count {
-  font-family: kanit,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: .05em;
-  color: #151515;
-}
-
-.sport-table-bonus-icon {
-  font-size: 20px;
-  color: #9b9b9b;
-}
-.row-15 {
-  margin-bottom: 0px;
-}
-.sport-table-title-score span:nth-last-child(1) {
-  margin-left: 20px;
-  color: #64b000;
-}
-
 /*MODAL*/
 .games_table .card{
   padding:10px;
@@ -199,18 +16,24 @@ sprite.sprite-sport-icon-07 {
   background-color: #64b000;
 }
 
-/*VIEWS*/
-div.view{
-  margin:10px;
-  padding: 10px;
+/*match types*/
+.row{
+  width:100%;
 }
-.user_view .card{
-  padding:10px;
-  margin:10px;
-  background: #d8cdd7;
-  width:20%;
+.inline {
+    display: inline-block;
+    width: 18%;
+    height: 50px;    
+    text-align: center;
+    cursor: pointer;
+    padding-top: 10px;
+    margin-right:  2px;
 }
-.user_view .medium_font{
-  font-size: 18px;
+div.paintmedull{
+  border-right: 1px #e2dfdf solid;
+ 
 }
-
+div.active {
+    font-weight: bold;
+ 
+}

@@ -1,0 +1,17 @@
+.row{
+	width:100%;
+}
+.user_view {
+ margin-left: 20px;
+}
+li.leader-board-li{
+	list-style: none;
+}
+.leader-board-li.form-control {
+    margin-bottom: 5px;
+    background-color: #fff;
+    height: auto !important;
+}
+.leader-board-li.form-control i {
+    color: #2d50d4;
+}

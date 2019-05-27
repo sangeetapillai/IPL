@@ -1,0 +1,30 @@
+<div *ngIf="users;then showUsers else showNoContentMessage"></div>
+<ng-template #showNoContentMessage>
+      Leaderboard not available
+</ng-template>
+<ng-template #showUsers>
+
+<div  class="view user_view">
+
+    <input [(ngModel)]="searchText" class="searchbar form-control" placeholder="Search..." />
+<br>
+  <div>
+  	<div  *ngFor="let user of users | search : searchText ;let i=index" class="leader-board-li form-control"  
+  	 >
+  		<div class="row">
+  			<div class="col-md-2">
+  				<i [style.font-size] = "font_size[i]" [style.color] = "back_color[i]" class="fa fa-trophy"></i>     
+  			</div>
+  			<div class="col-md-10">
+  				{{user.rank}}. {{user.userName}}   
+	        <label> <i class="fa fa-won"></i>{{user.userPoints}}	     </label>
+	        <label><i class="fa fa-thumbs-up"></i>{{user.matchesWon}}</label>
+	        <label><i class="fa fa-thumbs-down"></i> {{user.matchesLost}}   </label>
+	        </div>     
+	    </div>
+	 
+  	</div>
+  	
+  </div>
+</div>
+</ng-template>
