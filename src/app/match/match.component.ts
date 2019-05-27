@@ -29,13 +29,13 @@ export class MatchComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-     this.userEmail = 'Sangeeta'
+     this.userEmail = localStorage.getItem('useremail');
   	 this.getUpcomingMatchByTemplate();
   }
 
   getUpcomingMatchByTemplate(){
     this.matchlistloading = true;
-    this.appService.getUpcomingMatches(this.userEmail,this.template_id).subscribe
+    this.appService.getUpcomingMatches(localStorage.getItem('useremail') ,this.template_id).subscribe
     (matchData => {
       this.matchlistloading = false;
       this.matchesByType = matchData.matches;      
@@ -58,7 +58,7 @@ export class MatchComponent implements OnInit {
     let prediction_list = []
     let prediction: Prediction = <Prediction>{};
     prediction.matchId = parseInt(this.selectedMatchId);
-    prediction.userEmail = this.userEmail
+    prediction.userEmail = localStorage.getItem('useremail')
     prediction.prediction = this.selectedTeam
     prediction_list.push(prediction)
     this.appService.vote(prediction_list).subscribe
@@ -105,7 +105,7 @@ export class MatchComponent implements OnInit {
 
   getMyFantasyTeamForMatch(match){
     this.matchlistloading = true;
-    this.appService.getPlayersForMatchForUser(match.matchId,this.userEmail).subscribe
+    this.appService.getPlayersForMatchForUser(match.matchId,localStorage.getItem('useremail')).subscribe
     (PlayerData => {
       this.matchlistloading = false;
       this.myteam = PlayerData; 
@@ -142,7 +142,7 @@ export class MatchComponent implements OnInit {
     team.captain = this.myteam.captain;
     team.viceCaptain = this.myteam.viceCaptain;
     console.log(team);
-    this.appService.setPlayersForMatchForUser(this.currentfantasymatch.matchId,this.userEmail,team).subscribe
+    this.appService.setPlayersForMatchForUser(this.currentfantasymatch.matchId,localStorage.getItem('useremail'),team).subscribe
     (PlayerData => {
       this.matchlistloading = false;
       console.log(PlayerData);
